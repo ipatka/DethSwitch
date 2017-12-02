@@ -7,13 +7,13 @@ This is a basic setup to allow development of our basic contracts
 
 ### TestRPC Installation
 
-```$ npm install -g ethereumjs-testrpc
-```
+    $ npm install -g ethereumjs-testrpc
+
 
 ### Truffle Installations
 
-```$ npm install -g truffle
-```
+    $ npm install -g truffle
+
 
 #### Usage
 
@@ -21,5 +21,4 @@ Start TestRPC to allow real time testing of contracts (no need to wait for minin
 
 On a terminal window, run:
 
-```$ testrpc
-```
+     $ testrpc
