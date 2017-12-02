@@ -10,7 +10,7 @@ This is a basic setup to allow development of our basic contracts
     $ npm install -g ethereumjs-testrpc
 
 
-### Truffle Installations
+### Truffle Installation
 
     $ npm install -g truffle
 
