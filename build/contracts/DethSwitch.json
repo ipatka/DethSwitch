@@ -1,0 +1,51 @@
+{
+  "contract_name": "DethSwitch",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_value",
+          "type": "uint256"
+        },
+        {
+          "name": "_tokenAddr",
+          "type": "address"
+        }
+      ],
+      "name": "transferThrough",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b5b5b610190806100216000396000f300606060405263ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663b7d31ac6811461003d575b600080fd5b341561004857600080fd5b61007973ffffffffffffffffffffffffffffffffffffffff600435811690602435811690604435906064351661008d565b604051901515815260200160405180910390f35b60008173ffffffffffffffffffffffffffffffffffffffff81166323b872dd87878786604051602001526040517c010000000000000000000000000000000000000000000000000000000063ffffffff861602815273ffffffffffffffffffffffffffffffffffffffff93841660048201529190921660248201526044810191909152606401602060405180830381600087803b151561012c57600080fd5b6102c65a03f1151561013d57600080fd5b5050506040518051905015610155576001915061015a565b600091505b5b509493505050505600a165627a7a72305820e432796a2ac64d4119fbbb51284dac9d7f7e713cd46fe204e651b79e11d52afb0029",
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xb529f14aa8096f943177c09ca294ad66d2e08b1f",
+      "updated_at": 1512339632980
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1512339632980
+}

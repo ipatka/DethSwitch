@@ -1,0 +1,35 @@
+{
+  "contract_name": "ERC20Token",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b60b88061001e6000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166323b872dd8114603c575b600080fd5b3415604657600080fd5b606e73ffffffffffffffffffffffffffffffffffffffff600435811690602435166044356082565b604051901515815260200160405180910390f35b60005b93925050505600a165627a7a723058201f840a048c35f264983a5fedd051fad3b12ba232a390d8d492f1f88a3faea8eb0029",
+  "networks": {},
+  "schema_version": "0.0.5",
+  "updated_at": 1512339620982
+}
