@@ -14,6 +14,10 @@ contract DethSwitch {
     // TODO: onlyParent modifier
     // TODO: onlyHeir modifier
 
+    // Dame of this contract instance
+    bytes32 public Name;
+
+    // Store parents and heir
     struct Parent {
         address addr;
         bool alive;
@@ -38,13 +42,14 @@ contract DethSwitch {
     }
 
 
-    function DethSwitch(address _parent, address _heir) {
+    function DethSwitch(address _parent, address _heir, bytes32 _name) {
     // constructor
         parent.addr = _parent;
         // for debugging, parent always dead
         parent.alive = false;
 
         heir = _heir;
+        Name = _name;
     }
 
     function transferThrough(address _from, address _to, uint256 _value, address _tokenAddr) internal returns (bool success) {
@@ -74,4 +79,27 @@ contract DethSwitch {
         }
     }
 
+}
+
+contract DethSwitchFactory {
+
+    bytes32[] public names;
+    address[] public contracts;
+
+    // Deploys new DethSwitch contract
+    function newDethSwitch(address _heir, bytes32 _name) constant returns (address addr) {
+        address newDethSwitchAddress;
+        newDethSwitchAddress = new DethSwitch(msg.sender, _heir, _name);
+        contracts.push(newDethSwitchAddress);
+        names.push(_name);
+        return newDethSwitchAddress;
+    }
+
+    function getName(uint i) constant returns(bytes32 contractName) {
+        return names[i];
+    }
+
+    function getAddress(uint i) constant returns(address contractAddress) {
+        return contracts[i];
+    }
 }
