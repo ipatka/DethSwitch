@@ -106,15 +106,15 @@ contract DethSwitchFactory {
         return newDethSwitchAddress;
     }
 
-    function getName() constant returns(string contractName) {
+    function getName() view returns(string contractName) {
         return deployedContracts[msg.sender].name;
     }
 
-    function getAddress() constant returns(address contractAddress) {
+    function getAddress() view returns(address contractAddress) {
         return deployedContracts[msg.sender].contractAddr;
     }
 
-    function getHeir() constant returns(address heirAddress) {
+    function getHeir() view returns(address heirAddress) {
         return deployedContracts[msg.sender].heir;
     }
 
