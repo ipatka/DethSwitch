@@ -15,7 +15,7 @@ contract DethSwitch {
     // TODO: onlyHeir modifier
 
     // Dame of this contract instance
-    bytes32 public Name;
+    string public Name;
 
     // Store parents and heir
     struct Parent {
@@ -42,7 +42,7 @@ contract DethSwitch {
     }
 
 
-    function DethSwitch(address _parent, address _heir, bytes32 _name) {
+    function DethSwitch(address _parent, address _heir, string _name) {
     // constructor
         parent.addr = _parent;
         // for debugging, parent always dead
@@ -64,14 +64,14 @@ contract DethSwitch {
         }
     }
 
-    function getAllowance(address _tokenAddr) returns (uint256 amount) {
+    function getAllowance(address _tokenAddr) constant returns (uint256 amount) {
         // Find how much this DethSwitch contract is allowed to send on behalf of parent
         ERC20Token tok = ERC20Token(_tokenAddr);
         amount = tok.allowance(parent.addr, address(this));
         return amount;
     }
 
-    function withdraw(address _tokenAddr) onlyHeir returns (bool success) {
+    function withdraw(address _tokenAddr) onlyHeir onlyIfDead returns (bool success) {
         uint256 amount;
         amount = getAllowance(_tokenAddr);
         if (amount > 0) {
@@ -86,20 +86,38 @@ contract DethSwitchFactory {
     bytes32[] public names;
     address[] public contracts;
 
+    struct deployedContract{
+        address contractAddr;
+        address heir;
+        string name;
+    }
+
+    mapping (address => deployedContract) public deployedContracts;
+
     // Deploys new DethSwitch contract
-    function newDethSwitch(address _heir, bytes32 _name) constant returns (address addr) {
+    function newDethSwitch(address _heir, string _name) returns (address addr) {
         address newDethSwitchAddress;
         newDethSwitchAddress = new DethSwitch(msg.sender, _heir, _name);
-        contracts.push(newDethSwitchAddress);
-        names.push(_name);
+        deployedContract newDethSwitchContract;
+        newDethSwitchContract.contractAddr = newDethSwitchAddress;
+        newDethSwitchContract.heir = _heir;
+        newDethSwitchContract.name = _name;
+        deployedContracts[msg.sender] = newDethSwitchContract;
         return newDethSwitchAddress;
     }
 
-    function getName(uint i) constant returns(bytes32 contractName) {
-        return names[i];
+    function getName() constant returns(string contractName) {
+        return deployedContracts[msg.sender].name;
     }
 
-    function getAddress(uint i) constant returns(address contractAddress) {
-        return contracts[i];
+    function getAddress() constant returns(address contractAddress) {
+        return deployedContracts[msg.sender].contractAddr;
     }
+
+    function getHeir() constant returns(address heirAddress) {
+        return deployedContracts[msg.sender].heir;
+    }
+
+
+
 }
