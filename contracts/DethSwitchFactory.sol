@@ -78,42 +78,52 @@ contract DethSwitch {
         }
     }
 
+    function getHeir() view returns (address _heir) {
+        return heir;
+    }
+
+    function getParent() view returns (address _parent) {
+        return parent.addr;
+    }
+
+    function getName() view returns (string _name) {
+        return Name;
+    }
+
 }
 
 contract DethSwitchFactory {
 
-    struct deployedContract{
-        address contractAddr;
-        address heir;
-        string name;
-    }
 
-    mapping (address => deployedContract) public deployedContracts;
+    mapping (address => address[]) public deployedContractsByParent;
+    mapping (address => address[]) public deployedContractsByHeir;
 
     // Deploys new DethSwitch contract
     function newDethSwitch(address _heir, string _name) returns (address addr) {
         address newDethSwitchAddress;
         newDethSwitchAddress = new DethSwitch(msg.sender, _heir, _name);
-        deployedContract newDethSwitchContract;
-        newDethSwitchContract.contractAddr = newDethSwitchAddress;
-        newDethSwitchContract.heir = _heir;
-        newDethSwitchContract.name = _name;
-        deployedContracts[msg.sender] = newDethSwitchContract;
+        // Store contract information by owner and by heir
+        deployedContractsByParent[msg.sender].push(newDethSwitchAddress);
+        deployedContractsByHeir[_heir].push(newDethSwitchAddress);
         return newDethSwitchAddress;
     }
 
-    function getName() view returns(string contractName) {
-        return deployedContracts[msg.sender].name;
+    // Return number of contracts in struct array. Needed because can't return dynamic array
+    // Implementation feels clumsy though
+    function getNumberOfOwnedContracts() view returns (uint256 numContracts) {
+        return deployedContractsByParent[msg.sender].length;
     }
 
-    function getAddress() view returns(address contractAddress) {
-        return deployedContracts[msg.sender].contractAddr;
+    function getNumberOfHeirContracts() view returns (uint256 numContracts) {
+        return deployedContractsByHeir[msg.sender].length;
     }
 
-    function getHeir() view returns(address heirAddress) {
-        return deployedContracts[msg.sender].heir;
+    function getOwnedContracts(uint256 contractIndex) view returns(address contractAddress) {
+        return deployedContractsByParent[msg.sender][contractIndex];
     }
 
-
+    function getHeirContracts(uint256 contractIndex) view returns(address contractAddress) {
+        return deployedContractsByHeir[msg.sender][contractIndex];
+    }
 
 }

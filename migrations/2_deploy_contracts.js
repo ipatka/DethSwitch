@@ -3,6 +3,6 @@ var DethSwitchFactory = artifacts.require("./DethSwitchFactory.sol");
 
 module.exports = function(deployer) {
   // Use deployer to state migration tasks.
-    //deployer.deploy(AnyERC20Token);
+ //   deployer.deploy(AnyERC20Token);
     deployer.deploy(DethSwitchFactory);
 };
