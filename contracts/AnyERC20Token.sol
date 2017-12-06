@@ -114,8 +114,7 @@ contract AnyERC20Token is StandardToken {
 
 //make sure this function name matches the contract name above. So if you're token is called TutorialToken, make sure the //contract name above is also TutorialToken instead of ERC20Token
 
-    function AnyERC20Token(
-        ) {
+    function AnyERC20Token() {
         balances[msg.sender] = 42;               // Give the creator all initial tokens (100000 for example)
         totalSupply = 42;                        // Update total supply (100000 for example)
         name = "Any ERC20 Token";                                   // Set the name for display purposes 
