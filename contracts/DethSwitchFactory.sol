@@ -9,10 +9,9 @@ contract ERC20Token {
 
 contract DethSwitch {
     
-    // TODO: make DethSwitch contract factory
-    // TODO: make mapping that stores token addresses, heirs and values
-    // TODO: onlyParent modifier
-    // TODO: onlyHeir modifier
+    // TODO: make mapping that stores token addresses, heirs and values ?
+    // TODO: make check-in feature
+    // TODO: add getters for heir, parent
 
     // Dame of this contract instance
     string public Name;
@@ -82,9 +81,6 @@ contract DethSwitch {
 }
 
 contract DethSwitchFactory {
-
-    bytes32[] public names;
-    address[] public contracts;
 
     struct deployedContract{
         address contractAddr;
