@@ -127,6 +127,10 @@ contract DethSwitchFactory {
     mapping (address => address[]) public deployedContractsByParent;
     mapping (address => address[]) public deployedContractsByHeir;
 
+    function DethSwitchFactory() {
+        //nothing to do
+    }
+
     // Deploys new DethSwitch contract
     function newDethSwitch(address _heir, string _contractName, uint _timeTillExpiration) returns (address addr) {
         address newDethSwitchAddress;
@@ -139,22 +143,21 @@ contract DethSwitchFactory {
 
     // Return number of contracts in struct array. Needed because can't return dynamic array
     // Implementation feels clumsy though
-    function getNumberOfOwnedContracts() view returns (uint256 numContracts) {
+    function getNumberOfOwnedContracts() view returns (uint numContracts) {
         return deployedContractsByParent[msg.sender].length;
     }
 
-    function getNumberOfHeirContracts() view returns (uint256 numContracts) {
+    function getNumberOfHeirContracts() view returns (uint numContracts) {
         return deployedContractsByHeir[msg.sender].length;
     }
 
-    function getOwnedContracts(uint256 contractIndex) view returns(address contractAddress) {
+    function getOwnedContracts(uint256 contractIndex) view returns(address) {
         require(contractIndex < deployedContractsByParent[msg.sender].length);
         return deployedContractsByParent[msg.sender][contractIndex];
     }
 
-    function getHeirContracts(uint256 contractIndex) view returns(address contractAddress) {
+    function getHeirContracts(uint256 contractIndex) view returns(address) {
         require(contractIndex < deployedContractsByHeir[msg.sender].length);
         return deployedContractsByHeir[msg.sender][contractIndex];
     }
-
 }
