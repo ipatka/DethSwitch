@@ -9,12 +9,7 @@ contract ERC20Token {
 }
 
 contract DethSwitch {
-    
-    // TODO: make mapping that stores token addresses, heirs and values ?
-    // TODO: make check-in feature
-    // TODO: add getters for heir, parent
-
-    // Dame of this contract instance
+    // Name of this contract instance
     string public contractName;
 
     address parent;
@@ -36,6 +31,11 @@ contract DethSwitch {
         _;
     }
 
+    modifier parentCannotBeHeir() {
+        require(msg.sender != heir);
+        _;
+    }
+
     modifier expirationTimeNoOverflow(uint256 _daysTillExpiration) {
         //For now, maximum extension allowed is 10 years
         //also have to check for integer overflow
@@ -51,6 +51,7 @@ contract DethSwitch {
     }
 
     function DethSwitch(address _parent, address _heir, string _contractName, uint256 _daysTillExpiration) 
+    parentCannotBeHeir
     {
     /* 
     _parent = wallet address of parent
