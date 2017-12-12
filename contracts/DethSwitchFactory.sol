@@ -31,11 +31,6 @@ contract DethSwitch {
         _;
     }
 
-    modifier parentCannotBeHeir() {
-        require(msg.sender != heir);
-        _;
-    }
-
     modifier expirationTimeNoOverflow(uint256 _daysTillExpiration) {
         //For now, maximum extension allowed is 10 years
         //also have to check for integer overflow
@@ -51,7 +46,6 @@ contract DethSwitch {
     }
 
     function DethSwitch(address _parent, address _heir, string _contractName, uint256 _daysTillExpiration) 
-    parentCannotBeHeir
     {
     /* 
     _parent = wallet address of parent
@@ -59,6 +53,7 @@ contract DethSwitch {
     _contractName = nickname of this generated contract by _parent
     _timeTillExpiration = expiration time in DAYS from block.timestamp
     */
+        require(_parent != _heir);
         parent = _parent;
         heir = _heir;
         contractName = _contractName;
